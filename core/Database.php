@@ -1,4 +1,9 @@
 <?php
+require __DIR__ . '/../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../");
+$dotenv->load();
+
 class Database {
     private $host;
     private $username;
@@ -11,7 +16,7 @@ class Database {
     {
         $this->host = $_ENV['DB_HOST'];
         $this->username = $_ENV['DB_USERNAME'];
-        $this->password = $_ENV['DB_PASWWORD'];
+        $this->password = $_ENV['DB_PASS'];
         $this->db_name = $_ENV['DB_NAME'];
 
         $this->conn = mysqli_connect(
