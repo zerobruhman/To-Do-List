@@ -7,7 +7,7 @@ class User {
     public function __construct()
     {
         $database = new Database();
-        $this->db = $database->koneksi;        
+        $this->db = $database->conn;        
     }
     public function register($username, $password) {
         $hash = password_hash($password, PASSWORD_DEFAULT);

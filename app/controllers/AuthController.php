@@ -62,8 +62,9 @@ class AuthController {
             $_SESSION['login'] = true;
             $_SESSION['username'] = $user["username"];
             $_SESSION['role'] = $user['role'];
-
-            header("Location: /public/index.php?action=todo");
+            $_SESSION['user_id'] = $user['id'];
+            
+            header("Location: index.php?action=todo");
             exit();
         }
         return "Login gagal! Username atau Password salah!";
