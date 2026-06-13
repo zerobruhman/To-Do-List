@@ -30,12 +30,23 @@ $todos = $todos ?? [];
     <h2>Daftar Todo</h2>
     <?php foreach ($todos as $todo):?>
         <div style="border: 10px solid #ccc; padding: 10px; margin-bottom: 10px;">
-            <h3><?= htmlspecialchars($todo['judul']) ?></h2>
-            <p>
-                <?= nl2br($todo['deskripsi']) ?>
-            </p>
-            <p>Status: <?= $todo['status'] ?></p>
-            <button>Edit</button> <input type="checkbox"> <button>Hapus</button> 
+            <h3>
+                <?php if ($todo['status'] == 'selesai'): ?>
+                    ✅
+                <?php else: ?>
+                    ⬜
+                <?php endif?>
+                
+                <?= htmlspecialchars($todo['judul']) ?>
+            </h3>
+
+            <p> <?= nl2br($todo['deskripsi']) ?></p>
+            <small>Status: <?= htmlspecialchars($todo['status']) ?></small>
+            <form method="POST" action="index.php?action=todo-toggle">
+                 <input type="hidden" name="csrf_token" value=<?= CSRF::GenerateCsrftoken() ?>>
+                 <input type="hidden" name="todo_id" value=<?= $todo['id'] ?>>
+                 <button type="submit">Toggle</button>
+            </form>
         </div>
     <?php endforeach?>
 </body>
