@@ -24,7 +24,7 @@ $todos = $todos ?? [];
             <textarea rows="4" name="deskripsi"></textarea> 
         </div>
         <br>
-        <button type="submit" name="buat">Buat</button>
+        <button type="submit">Buat</button>
     </form>
 
     <h2>Daftar Todo</h2>

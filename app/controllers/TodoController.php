@@ -17,15 +17,13 @@ class TodoController {
         require __DIR__ . "/../views/todo/index.php";
     }
     public function store() {
-        if (isset($_POST['buat'])) {
-            $judul = $_POST['judul'] ?? '';
-            $deskripsi = $_POST['deskripsi'] ?? '';
-            $user_id = $_SESSION['user_id'];
+        $judul = $_POST['judul'] ?? '';
+        $deskripsi = $_POST['deskripsi'] ?? '';
+        $user_id = $_SESSION['user_id'];
 
-            $this->todomodel->createTodo($user_id, $judul, $deskripsi);
-            header("Location: index.php?action=todo");
-            exit();
-        }
+        $this->todomodel->createTodo($user_id, $judul, $deskripsi);
+        header("Location: index.php?action=todo");
+        exit();
     }
 }
 ?>

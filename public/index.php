@@ -34,6 +34,8 @@
             $todo->index();
             break;
         case "todo-store":
+            CSRF::verifyMethodPost();
+            CSRF::verifyCsrfToken();
             $todo->store();
         case "edit":
             CSRF::verifyMethodPost();
