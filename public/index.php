@@ -24,6 +24,12 @@
         case "logout":
             $auth->logout();
             break;
+        case "edit":
+            CSRF::verifyMethodPost();
+            CSRF::verifyCsrfToken();
+            $id = $_POST['id'] ?? null;
+            $dashboard->updateUser($id);
+            break;  
         case "delete":
             CSRF::verifyMethodPost();
             CSRF::verifyCsrfToken();
@@ -37,12 +43,11 @@
             CSRF::verifyMethodPost();
             CSRF::verifyCsrfToken();
             $todo->store();
-        case "edit":
+            break;
+        case "todo-toggle":
             CSRF::verifyMethodPost();
             CSRF::verifyCsrfToken();
-            $id = $_POST['id'] ?? null;
-            $dashboard->updateUser($id);
-            break;  
+            
         default:
             $auth->login();
             break;
