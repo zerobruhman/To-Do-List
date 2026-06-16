@@ -47,7 +47,7 @@
         case "todo-toggle":
             CSRF::verifyMethodPost();
             CSRF::verifyCsrfToken();
-            
+            $todo->toggleStatus();
         default:
             $auth->login();
             break;

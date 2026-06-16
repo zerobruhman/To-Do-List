@@ -37,5 +37,18 @@ class TodoModel {
         );
         return $pernyataan->execute();
     }
+    public function findById(int $id) {
+        $query = "SELECT * FROM Todos WHERE id = ?";
+        $pernyataan = $this->db->prepare($query);
+        $pernyataan->bind_param("i", $id);
+        $pernyataan->execute();
+        return $pernyataan->get_result()->fetch_assoc();
+    }
+    public function updateStatus(int $id, string $status) {
+        $query = "UPDATE Todos SET status = ? WHERE id = ?";
+        $pernyataan = $this->db->prepare($query);
+        $pernyataan->bind_param("si", $status, $id);
+        return $pernyataan->execute();
+    }
 }
 ?>

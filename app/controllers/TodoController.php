@@ -25,5 +25,15 @@ class TodoController {
         header("Location: index.php?action=todo");
         exit();
     }
+    public function toggleStatus() {
+        $todo_id = $_POST['todo_id'] ?? '';
+        $user_id = $_SESSION['user_id'];
+        $todos = $this->todomodel->findById($todo_id);
+
+        $statusbaru = ($todos['status'] == 'pending') ? 'selesai' : 'pending';
+        $this->todomodel->updateStatus($todo_id, $statusbaru);
+        header("Location: index.php?action=todo");
+        exit;
+    }
 }
 ?>
