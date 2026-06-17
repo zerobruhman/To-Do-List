@@ -132,7 +132,6 @@ Project ini dibuat untuk belajar:
 
 Update yang mesti di tambahkan:
 
-* Toggle status
 * Security di Semua form
 * Update & Delete Todo
 * Frontend yang bagus
