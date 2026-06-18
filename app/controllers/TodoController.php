@@ -35,5 +35,13 @@ class TodoController {
         header("Location: index.php?action=todo");
         exit;
     }
+    public function deleteTodo() {
+        $todo_id = $_POST['todo_id'] ?? '';
+        $user_id = $_SESSION['user_id'] ?? '';
+        
+        $this->todomodel->delete($todo_id, $user_id);
+        header("Location: index.php?action=todo");
+        exit;
+    }
 }
 ?>

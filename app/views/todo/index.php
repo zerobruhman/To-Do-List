@@ -47,6 +47,11 @@ $todos = $todos ?? [];
                  <input type="hidden" name="todo_id" value=<?= $todo['id'] ?>>
                  <button type="submit">Toggle</button>
             </form>
+            <form method="POST" action="index.php?action=todo-delete">
+                <input type="hidden" name="csrf_token" value="<?= CSRF::GenerateCsrftoken() ?>">
+                <input type="hidden" name="todo_id" value="<?= $todo['id'] ?>">
+                <button type="submit">Delete</button>
+            </form>
         </div>
     <?php endforeach?>
 </body>

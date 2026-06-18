@@ -9,7 +9,7 @@ class TodoModel {
         $database = new Database();
         $this->db = $database->conn;
     }
-    public function getAll($user_id) {
+    public function getAll(int $user_id) {
         $query = "SELECT * FROM Todos WHERE user_id = ?";
         $pernyataan = $this->db->prepare($query);
         $pernyataan->bind_param(
@@ -48,6 +48,12 @@ class TodoModel {
         $query = "UPDATE Todos SET status = ? WHERE id = ?";
         $pernyataan = $this->db->prepare($query);
         $pernyataan->bind_param("si", $status, $id);
+        return $pernyataan->execute();
+    }
+    public function delete(int $id, int $user_id) {
+        $query = "DELETE FROM Todos WHERE id = ? AND user_id = ?";
+        $pernyataan = $this->db->prepare($query);
+        $pernyataan->bind_param("ii", $id, $user_id);
         return $pernyataan->execute();
     }
 }

@@ -27,6 +27,7 @@
         case "edit":
             CSRF::verifyMethodPost();
             CSRF::verifyCsrfToken();
+            
             $id = $_POST['id'] ?? null;
             $dashboard->updateUser($id);
             break;  
@@ -42,12 +43,20 @@
         case "todo-store":
             CSRF::verifyMethodPost();
             CSRF::verifyCsrfToken();
+            
             $todo->store();
             break;
         case "todo-toggle":
             CSRF::verifyMethodPost();
             CSRF::verifyCsrfToken();
+            
             $todo->toggleStatus();
+        case "todo-delete":
+            CSRF::verifyMethodPost();
+            CSRF::verifyCsrfToken();
+
+            $todo->deleteTodo();
+            break;
         default:
             $auth->login();
             break;
