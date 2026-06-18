@@ -133,7 +133,7 @@ Project ini dibuat untuk belajar:
 Update yang mesti di tambahkan:
 
 * Security di Semua form
-* Update & Delete Todo
+* Update Todo
 * Frontend yang bagus
 * Merapihkan CSS
 
