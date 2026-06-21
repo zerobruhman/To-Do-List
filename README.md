@@ -98,14 +98,19 @@ Contoh routing pada `index.php`:
 
 ```php
 switch ($action) {
-    case "todo":
-        $todo->index();
-        break;
-
-    case "todo-store":
-        $todo->store();
-        break;
-    // Hanya bisa lewat method POST!
+        case "todo":
+            $todo->index();
+            break;
+        case "todo-store":
+            $todo->store();
+            break;
+        case "todo-toggle":
+            $todo->toggleStatus();
+            break;
+        case "todo-delete":
+            $todo->deleteTodo();
+            break;
+            //hanya bisa lewat method POST!
 }
 ```
 
