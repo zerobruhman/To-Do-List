@@ -442,6 +442,26 @@ $pending   = $total - $selesai;
             border-color: var(--danger);
         }
 
+        .btn-update {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 12px;
+            background: var(--accent-dim);
+            border: 1px solid rgba(255,77,77,0.2);
+            border-radius: 6px;
+            color: var(--accent);
+            font-size: 12px;
+            font-family: var(--sans);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .btn-update:hover {
+            background: rgba(79,124,255,0.2);
+            border-color: var(--accent);
+        }
         /* ── Empty state ── */
         .empty-state {
             padding: 60px 24px;
@@ -560,7 +580,6 @@ $pending   = $total - $selesai;
                 </div>
 
                 <div class="todo-actions">
-                    <!-- Toggle -->
                     <form method="POST" action="index.php?action=todo-toggle" style="display:inline">
                         <input type="hidden" name="csrf_token" value="<?= CSRF::GenerateCsrftoken() ?>">
                         <input type="hidden" name="todo_id" value="<?= $todo['id'] ?>">
@@ -568,12 +587,19 @@ $pending   = $total - $selesai;
                             <?= $done ? 'Buka' : 'Selesai' ?>
                         </button>
                     </form>
-                    <!-- Delete -->
                     <form method="POST" action="index.php?action=todo-delete" style="display:inline">
                         <input type="hidden" name="csrf_token" value="<?= CSRF::GenerateCsrftoken() ?>">
                         <input type="hidden" name="todo_id" value="<?= $todo['id'] ?>">
                         <button type="submit" class="btn-delete"
-                                onclick="return confirm('Hapus task ini?')">Hapus</button>
+                            onclick="return confirm('Hapus task ini?')">Hapus
+                        </button>
+                    </form>
+                    <form method="POST" action="index.php?action=todo-update" style="display: inline;">
+                        <input type="hidden" name="csrf_token" value="<?= CSRF::GenerateCsrftoken() ?>">
+                        <input type="hidden" name="todo_id" value="<?= $todo['id'] ?>">
+                        <button type="submit" class="btn-update">
+                            Update
+                        </button>
                     </form>
                 </div>
             </div>
