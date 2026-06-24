@@ -110,6 +110,9 @@ switch ($action) {
         case "todo-delete":
             $todo->deleteTodo();
             break;
+        case "todo-edit":
+            $todo->updateTodo();
+            break;
             //hanya bisa lewat method POST!
 }
 ```
