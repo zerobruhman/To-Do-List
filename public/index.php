@@ -59,6 +59,9 @@
             $todo->deleteTodo();
             break;
         case "todo-edit":
+            CSRF::verifyMethodPost();
+            CSRF::verifyCsrfToken();
+            
             $todo->updateTodo();
             break;
         default:
