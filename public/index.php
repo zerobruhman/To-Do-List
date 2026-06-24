@@ -51,11 +51,15 @@
             CSRF::verifyCsrfToken();
             
             $todo->toggleStatus();
+            break;
         case "todo-delete":
             CSRF::verifyMethodPost();
             CSRF::verifyCsrfToken();
 
             $todo->deleteTodo();
+            break;
+        case "todo-edit":
+            $todo->updateTodo();
             break;
         default:
             $auth->login();

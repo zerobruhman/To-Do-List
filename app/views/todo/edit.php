@@ -1,10 +1,5 @@
 <?php
 require_once __DIR__ . "/../../../core/CSRF.php";
-$todos = $todos ?? [];
-
-$total     = count($todos);
-$selesai   = count(array_filter($todos, fn($t) => $t['status'] === 'selesai'));
-$pending   = $total - $selesai;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -506,107 +501,32 @@ $pending   = $total - $selesai;
         <div class="page-sub">// kelola semua tugas kamu di sini</div>
     </div>
 
-    <!-- Stats -->
-    <div class="stats-row">
-        <div class="stat-card">
-            <div class="stat-label">Total Tasks</div>
-            <div class="stat-value accent"><?= $total ?></div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-label">Selesai</div>
-            <div class="stat-value success"><?= $selesai ?></div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-label">Pending</div>
-            <div class="stat-value warn"><?= $pending ?></div>
-        </div>
-    </div>
-
     <!-- Add Todo -->
     <div class="add-card">
         <div class="card-header">
-            <span class="card-title">+ Tambah Todo Baru</span>
+            <span class="card-title">+- Edit Todo</span>
         </div>
         <div class="card-body">
-            <form method="POST" action="index.php?action=todo-store">
+            <form method="POST">
                 <input type="hidden" name="csrf_token" value="<?= CSRF::GenerateCsrftoken() ?>">
+                <input type="hidden" name="todo_id" value="<?= $todo['id'] ?? '' ?>">
                 <div class="form-row">
                     <div class="form-group full">
                         <label class="form-label">Judul</label>
-                        <input type="text" name="judul" class="form-input"
-                               placeholder="Apa yang perlu dilakukan?" required>
+                        <input type="text" name="judul" class="form-input" value="<?= htmlspecialchars($todo['judul'] ?? '') ?>" required>
                     </div>
                     <div class="form-group full">
                         <label class="form-label">Deskripsi</label>
-                        <textarea name="deskripsi" class="form-textarea"
-                                  placeholder="Tambahkan catatan atau detail (opsional)…"></textarea>
+                        <textarea name="deskripsi" class="form-textarea"><?= nl2br($todo['deskripsi'] ?? '') ?></textarea>
                     </div>
                 </div>
-                <div class="form-footer">
-                    <button type="submit" class="btn-submit">Buat Task</button>
+                <div class="todo-action">
+                    <button type="submit" class="btn-toggle" name="edit-task">Edit Task</button>
+                    <a class="btn-delete" href="index.php?action=todo">Batal</a>
                 </div>
             </form>
         </div>
     </div>
-
-    <!-- Todo List -->
-    <div class="list-card">
-        <div class="list-header">
-            <span class="card-title" style="font-size:12px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--text2);">Daftar Todo</span>
-            <span class="list-count"><?= $total ?> records</span>
-        </div>
-
-        <?php if (empty($todos)): ?>
-            <div class="empty-state">// belum ada task — tambahkan satu di atas</div>
-        <?php else: ?>
-            <?php foreach ($todos as $todo):
-                $done = $todo['status'] === 'selesai';
-            ?>
-            <div class="todo-item <?= $done ? 'done' : '' ?>">
-                <div class="todo-check"><?= $done ? '✅' : '⬜' ?></div>
-
-                <div class="todo-body">
-                    <div class="todo-title"><?= htmlspecialchars($todo['judul']) ?></div>
-                    <?php if (!empty($todo['deskripsi'])): ?>
-                        <div class="todo-desc"><?= nl2br(htmlspecialchars($todo['deskripsi'])) ?></div>
-                    <?php endif; ?>
-                    <div class="todo-meta">
-                        <?php if ($done): ?>
-                            <span class="badge badge-done">● selesai</span>
-                        <?php else: ?>
-                            <span class="badge badge-pending">○ pending</span>
-                        <?php endif; ?>
-                    </div>
-                </div>
-
-                <div class="todo-actions">
-                    <form method="POST" action="index.php?action=todo-toggle" style="display:inline">
-                        <input type="hidden" name="csrf_token" value="<?= CSRF::GenerateCsrftoken() ?>">
-                        <input type="hidden" name="todo_id" value="<?= $todo['id'] ?>">
-                        <button type="submit" class="btn-toggle">
-                            <?= $done ? 'Buka' : 'Selesai' ?>
-                        </button>
-                    </form>
-                    <form method="POST" action="index.php?action=todo-delete" style="display:inline">
-                        <input type="hidden" name="csrf_token" value="<?= CSRF::GenerateCsrftoken() ?>">
-                        <input type="hidden" name="todo_id" value="<?= $todo['id'] ?>">
-                        <button type="submit" class="btn-delete"
-                            onclick="return confirm('Hapus task ini?')">Hapus
-                        </button>
-                    </form>
-                    <form method="POST" action="index.php?action=todo-edit" style="display: inline;">
-                        <input type="hidden" name="csrf_token" value="<?= CSRF::GenerateCsrftoken() ?>">
-                        <input type="hidden" name="todo_id" value="<?= $todo['id'] ?>">
-                        <button type="submit" class="btn-edit">
-                            Edit
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
-    </div>
-
 </main>
 </body>
 </html>

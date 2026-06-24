@@ -44,6 +44,12 @@ class TodoModel {
         $pernyataan->execute();
         return $pernyataan->get_result()->fetch_assoc();
     }
+    public function update(array $todo_data) {
+        $query = "UPDATE Todos SET judul = ?, deskripsi = ? WHERE id = ? AND user_id = ?";
+        $pernyataan = $this->db->prepare($query);
+        $pernyataan->bind_param("ssii", $todo_data['judul'], $todo_data['deskripsi'], $todo_data['id'], $todo_data['user_id']);
+        return $pernyataan->execute();
+    }
     public function updateStatus(int $id, string $status) {
         $query = "UPDATE Todos SET status = ? WHERE id = ?";
         $pernyataan = $this->db->prepare($query);
