@@ -24,7 +24,7 @@ Aplikasi To-Do List sederhana berbasis PHP Native menggunakan pola MVC (Model Vi
 
 ---
 
-## 📚 Alur MVC
+## Alur MVC
 
 ### Model
 
@@ -64,7 +64,7 @@ views/todo/index.php
 
 ---
 
-## 🔐 Keamanan
+## Keamanan
 
 ### CSRF Protection
 
@@ -137,13 +137,6 @@ Project ini dibuat untuk belajar:
 ---
 
 ## Pengembangan Selanjutnya
-
-Update yang mesti di tambahkan:
-
-* Security di Semua form
-* Update Todo
-* Frontend yang bagus
-* Merapihkan CSS
 
 Beberapa fitur yang mungkin bisa ditambahkan:
 
