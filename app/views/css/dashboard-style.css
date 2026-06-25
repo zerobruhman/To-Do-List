@@ -11,9 +11,6 @@
     --danger: #ff4d4d;
     --danger-dim: rgba(255,77,77,0.1);
     --success: #3ddc97;
-    --success-dim: rgba(61,220,151,0.1);
-    --warn: #f5a623;
-    --warn-dim: rgba(245,166,35,0.1);
     --text: #e8ecf5;
     --text2: #7a8299;
     --text3: #4a5168;
@@ -30,7 +27,7 @@ body {
     flex-direction: column;
 }
 
-/* ── Topbar ── */
+/* Top bar */
 .topbar {
     display: flex;
     align-items: center;
@@ -113,17 +110,19 @@ body {
     background: var(--danger-dim);
 }
 
-/* ── Main layout ── */
+/* Main layout */
 .main {
     flex: 1;
     padding: 32px;
-    max-width: 860px;
+    max-width: 1100px;
     width: 100%;
     margin: 0 auto;
 }
 
-/* ── Page header ── */
-.page-header { margin-bottom: 28px; }
+/* Page header */
+.page-header {
+    margin-bottom: 28px;
+}
 
 .page-title {
     font-size: 22px;
@@ -139,7 +138,7 @@ body {
     font-family: var(--mono);
 }
 
-/* ── Stats row ── */
+/* Stats row */
 .stats-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -171,123 +170,34 @@ body {
     line-height: 1;
 }
 
-.stat-value.accent  { color: var(--accent); }
-.stat-value.success { color: var(--success); }
-.stat-value.warn    { color: var(--warn); }
+.stat-value.accent { color: var(--accent); }
 
-/* ── Add-todo card ── */
-.add-card {
+/* Table container */
+.table-wrap {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
     overflow: hidden;
-    margin-bottom: 24px;
 }
 
-.card-header {
+.table-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 24px;
+    padding: 16px 24px;
     border-bottom: 1px solid var(--border);
-    background: var(--surface2);
 }
 
-.card-title {
-    font-size: 12px;
+.table-title {
+    font-size: 13px;
     font-weight: 600;
     color: var(--text2);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.07em;
     font-family: var(--mono);
 }
 
-.card-body { padding: 20px 24px; }
-
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 16px;
-}
-
-.form-group { display: flex; flex-direction: column; gap: 6px; }
-.form-group.full { grid-column: 1 / -1; }
-
-.form-label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text3);
-    font-family: var(--mono);
-}
-
-.form-input,
-.form-textarea {
-    background: var(--bg);
-    border: 1px solid var(--border2);
-    border-radius: 7px;
-    padding: 9px 13px;
-    color: var(--text);
-    font-family: var(--sans);
-    font-size: 13px;
-    outline: none;
-    transition: border-color 0.15s;
-    resize: vertical;
-}
-
-.form-input::placeholder,
-.form-textarea::placeholder { color: var(--text3); }
-
-.form-input:focus,
-.form-textarea:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(79,124,255,0.1);
-}
-
-.form-textarea { min-height: 80px; }
-
-.form-footer {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.btn-submit {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 20px;
-    background: var(--accent);
-    border: none;
-    border-radius: 7px;
-    color: #fff;
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: opacity 0.15s;
-    letter-spacing: 0.02em;
-}
-
-.btn-submit:hover { opacity: 0.88; }
-
-/* ── Todo list card ── */
-.list-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.list-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 24px;
-    border-bottom: 1px solid var(--border);
-}
-
-.list-count {
+.table-count {
     font-size: 12px;
     font-family: var(--mono);
     color: var(--text3);
@@ -297,108 +207,89 @@ body {
     border: 1px solid var(--border);
 }
 
-/* ── Todo item ── */
-.todo-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 18px 24px;
-    border-bottom: 1px solid var(--border);
-    transition: background 0.1s;
-    animation: rowIn 0.25s ease both;
-    animation-delay: calc(var(--i) * 0.04s);
+table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-.todo-item:last-child { border-bottom: none; }
-.todo-item:hover { background: var(--surface2); }
-
-.todo-check {
-    margin-top: 2px;
-    flex-shrink: 0;
-    font-size: 18px;
-    line-height: 1;
-}
-.todo-body { flex: 1; min-width: 0; }
-
-.todo-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 4px;
-    line-height: 1.4;
-}
-
-.todo-item.done .todo-title {
-    color: var(--text3);
-    text-decoration: line-through;
-}
-
-.todo-desc {
-    font-size: 12px;
-    color: var(--text2);
+thead th {
+    padding: 11px 24px;
+    text-align: left;
+    font-size: 11px;
     font-family: var(--mono);
-    white-space: pre-wrap;
-    word-break: break-word;
-}
-
-.todo-meta {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 8px;
-}
-
-.badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 2px 9px;
-    border-radius: 999px;
-    font-size: 10px;
-    font-family: var(--mono);
-    letter-spacing: 0.06em;
     text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text3);
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
     font-weight: 500;
 }
 
-.badge-done {
-    background: var(--success-dim);
-    border: 1px solid rgba(61,220,151,0.25);
-    color: var(--success);
+tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.1s;
 }
 
-.badge-pending {
-    background: var(--warn-dim);
-    border: 1px solid rgba(245,166,35,0.2);
-    color: var(--warn);
+tbody tr:last-child { border-bottom: none; }
+
+tbody tr:hover { background: var(--surface2); }
+
+td {
+    padding: 14px 24px;
+    font-size: 13px;
+    vertical-align: middle;
 }
 
-.todo-actions {
+.td-id {
+    font-family: var(--mono);
+    color: var(--text3);
+    font-size: 12px;
+    width: 60px;
+}
+
+.td-username {
+    font-weight: 600;
+    color: var(--text);
+}
+
+.td-password {
+    font-family: var(--mono);
+    color: var(--text3);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+}
+
+.td-actions {
+    width: 140px;
+    text-align: right;
+}
+
+.actions-wrap {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 6px;
-    flex-shrink: 0;
 }
 
-.btn-toggle {
+.btn-edit {
     display: inline-flex;
     align-items: center;
     gap: 4px;
     padding: 5px 12px;
-    background: var(--success-dim);
-    border: 1px solid rgba(61,220,151,0.2);
+    background: var(--accent-dim);
+    border: 1px solid rgba(79,124,255,0.25);
     border-radius: 6px;
-    color: var(--success);
+    color: var(--accent);
     font-size: 12px;
     font-family: var(--sans);
     font-weight: 600;
-    cursor: pointer;
+    text-decoration: none;
     transition: all 0.15s;
 }
 
-.btn-toggle:hover {
-    background: rgba(61,220,151,0.18);
-    border-color: var(--success);
+.btn-edit:hover {
+    background: rgba(79,124,255,0.2);
+    border-color: var(--accent);
 }
 
 .btn-delete {
@@ -422,27 +313,7 @@ body {
     border-color: var(--danger);
 }
 
-.btn-edit {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 5px 12px;
-    background: var(--accent-dim);
-    border: 1px solid rgba(255,77,77,0.2);
-    border-radius: 6px;
-    color: var(--accent);
-    font-size: 12px;
-    font-family: var(--sans);
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.15s;
-}
-
-.btn-edit:hover {
-    background: rgba(79,124,255,0.2);
-    border-color: var(--accent);
-}
-/* ── Empty state ── */
+/* Empty state */
 .empty-state {
     padding: 60px 24px;
     text-align: center;
@@ -451,8 +322,13 @@ body {
     font-family: var(--mono);
 }
 
-/* ── Animations ── */
+/* Fade-in rows */
 @keyframes rowIn {
     from { opacity: 0; transform: translateY(6px); }
     to   { opacity: 1; transform: translateY(0); }
+}
+
+tbody tr {
+    animation: rowIn 0.25s ease both;
+    animation-delay: calc(var(--i) * 0.04s);
 }
