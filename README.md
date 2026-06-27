@@ -33,8 +33,12 @@ Bertugas berkomunikasi dengan database.
 Contoh method:
 
 ```php
-getAll($user_id);
-create(int $user_id, string $judul, string $deskripsi = '');
+getAll(int $user_id);
+createTodo(int $user_id, string $judul, string $deskripsi = '');
+findById(int $id);
+update(array $todo_data);
+updateStatus(int $id, string $status);
+delete(int $id, int $user_id);
 ```
 
 ---
@@ -44,10 +48,12 @@ create(int $user_id, string $judul, string $deskripsi = '');
 Bertugas menerima request dari user.
 
 Contoh method:
-
 ```php
 index();
 store();
+toggleStatus();
+deleteTodo();
+updateTodo();
 ```
 
 ---
@@ -60,6 +66,7 @@ File:
 
 ```text
 views/todo/index.php
+views/todo/edit.php
 ```
 
 ---
@@ -137,6 +144,10 @@ Project ini dibuat untuk belajar:
 ---
 
 ## Pengembangan Selanjutnya
+
+Fitur yang harus di tambahkan:
+
+* Validasi input
 
 Beberapa fitur yang mungkin bisa ditambahkan:
 
