@@ -252,6 +252,17 @@ body {
     justify-content: flex-end;
 }
 
+.error-box {
+    background: var(--danger-dim);
+    border: 1px solid rgba(255,77,77,0.25);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--danger);
+    margin-bottom: 20px;
+    font-family: var(--mono);
+}
+
 .btn-submit {
     display: inline-flex;
     align-items: center;

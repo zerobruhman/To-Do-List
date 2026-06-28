@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . "/../../../core/CSRF.php";
 $todos = $todos ?? [];
-
+$error = $error ?? null;
 $total     = count($todos);
 $selesai   = count(array_filter($todos, fn($t) => $t['status'] === 'selesai'));
 $pending   = $total - $selesai;
@@ -65,13 +65,16 @@ $pending   = $total - $selesai;
             <span class="card-title">+ Tambah Todo Baru</span>
         </div>
         <div class="card-body">
+            <?php if ($error): ?>
+            <div class="error-box"><?= htmlspecialchars($error) ?></div>
+            <?php endif?>
             <form method="POST" action="index.php?action=todo-store">
                 <input type="hidden" name="csrf_token" value="<?= CSRF::GenerateCsrftoken() ?>">
                 <div class="form-row">
                     <div class="form-group full">
                         <label class="form-label">Judul</label>
                         <input type="text" name="judul" class="form-input"
-                               placeholder="Apa yang perlu dilakukan?" required>
+                               placeholder="Apa yang perlu dilakukan?">
                     </div>
                     <div class="form-group full">
                         <label class="form-label">Deskripsi</label>

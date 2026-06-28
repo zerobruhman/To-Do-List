@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . "/../../../core/CSRF.php";
+$error = $error ?? '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,22 +36,24 @@ require_once __DIR__ . "/../../../core/CSRF.php";
 
     <div class="page-header">
         <div class="page-title">My Tasks</div>
-        <div class="page-sub">// kelola semua tugas kamu di sini</div>
+        <div class="page-sub">// update tugas kamu di sini</div>
     </div>
 
-    <!-- Add Todo -->
     <div class="add-card">
         <div class="card-header">
             <span class="card-title">+- Edit Todo</span>
         </div>
         <div class="card-body">
+            <?php if ($error): ?>
+            <div class="error-box"><?= htmlspecialchars($error ?? '') ?></div>
+            <?php endif?>
             <form method="POST">
                 <input type="hidden" name="csrf_token" value="<?= CSRF::GenerateCsrftoken() ?>">
                 <input type="hidden" name="todo_id" value="<?= $todo['id'] ?? '' ?>">
                 <div class="form-row">
                     <div class="form-group full">
                         <label class="form-label">Judul</label>
-                        <input type="text" name="judul" class="form-input" value="<?= htmlspecialchars($todo['judul'] ?? '') ?>" required>
+                        <input type="text" name="judul" class="form-input" value="<?= htmlspecialchars($todo['judul'] ?? '') ?>">
                     </div>
                     <div class="form-group full">
                         <label class="form-label">Deskripsi</label>

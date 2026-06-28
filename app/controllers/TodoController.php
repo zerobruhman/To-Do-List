@@ -9,7 +9,7 @@ class TodoController {
     {
         $this->todomodel = new TodoModel();
     }
-    public function index() {
+    public function index($error = null) {
         AuthMiddleware::check();
         
         $todos = $this->todomodel->getAll($_SESSION['user_id']);
@@ -17,13 +17,19 @@ class TodoController {
         require __DIR__ . "/../views/todo/index.php";
     }
     public function store() {
+        $error = null;
         $judul = $_POST['judul'] ?? '';
         $deskripsi = $_POST['deskripsi'] ?? '';
         $user_id = $_SESSION['user_id'];
 
-        $this->todomodel->createTodo($user_id, $judul, $deskripsi);
-        header("Location: index.php?action=todo");
-        exit();
+        $error = $this->verifyJudul($judul);
+
+        if (empty($error)) {
+            $this->todomodel->createTodo($user_id, $judul, $deskripsi);
+            header("Location: index.php?action=todo");
+            exit();
+        }
+        $this->index($error);
     }
     public function toggleStatus() {
         $todo_id = $_POST['todo_id'] ?? '';
@@ -46,6 +52,8 @@ class TodoController {
     public function updateTodo() {
         AuthMiddleware::check();
 
+        $error = null;
+
         $todo_id = $_POST['todo_id'] ?? '';
 
         if (isset($_POST['edit-task'])) {
@@ -55,13 +63,20 @@ class TodoController {
                'id' => $todo_id,
                'user_id' => $_SESSION['user_id'] ?? ''
             ];
-            $this->todomodel->update($data);
-            header("Location: index.php?action=todo");
-            exit;
+            $error = $this->verifyJudul($data['judul']);
+            if (empty($error)) {
+                $this->todomodel->update($data);
+                header("Location: index.php?action=todo");
+                exit;
+            }
         }
         $todo = $this->todomodel->findById($todo_id);
 
         require __DIR__ . "/../views/todo/edit.php";
+    }
+    private function verifyJudul(string $judul) {
+        if (empty(trim($judul)))
+            return "Judul tolong di isi";
     }
 }
 ?>
