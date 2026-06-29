@@ -12,7 +12,16 @@ class TodoController {
     public function index($error = null) {
         AuthMiddleware::check();
         
-        $todos = $this->todomodel->getAll($_SESSION['user_id']);
+        $user_id = $_SESSION['user_id'];
+
+        $page = $_GET['page'] ?? 1;
+        $limit = 5;
+        $offset = ($page - 1) * $limit;
+
+        $todos = $this->todomodel->getAll($user_id, $limit, $offset);
+        $totalTodosperPage = count($todos);
+        $totalTodos = $this->todomodel->countAll($user_id);
+        $totalPages = ceil($totalTodos / $limit);
 
         require __DIR__ . "/../views/todo/index.php";
     }

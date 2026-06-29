@@ -2,9 +2,8 @@
 require_once __DIR__ . "/../../../core/CSRF.php";
 $todos = $todos ?? [];
 $error = $error ?? null;
-$total     = count($todos);
 $selesai   = count(array_filter($todos, fn($t) => $t['status'] === 'selesai'));
-$pending   = $total - $selesai;
+$pending   = $totalTodos ?? '' - $selesai;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +46,7 @@ $pending   = $total - $selesai;
     <div class="stats-row">
         <div class="stat-card">
             <div class="stat-label">Total Tasks</div>
-            <div class="stat-value accent"><?= $total ?></div>
+            <div class="stat-value accent"><?= $totalTodos ?? '' ?></div>
         </div>
         <div class="stat-card">
             <div class="stat-label">Selesai</div>
@@ -56,6 +55,10 @@ $pending   = $total - $selesai;
         <div class="stat-card">
             <div class="stat-label">Pending</div>
             <div class="stat-value warn"><?= $pending ?></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Total Pages</div>
+            <div class="stat-value accent"><?= $totalPages ?? '' ?></div>
         </div>
     </div>
 
@@ -93,7 +96,7 @@ $pending   = $total - $selesai;
     <div class="list-card">
         <div class="list-header">
             <span class="card-title" style="font-size:12px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--text2);">Daftar Todo</span>
-            <span class="list-count"><?= $total ?> records</span>
+            <span class="list-count"><?= $totalTodosperPage ?? '' ?> records</span>
         </div>
 
         <?php if (empty($todos)): ?>

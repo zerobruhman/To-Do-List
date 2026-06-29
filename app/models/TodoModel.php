@@ -9,12 +9,14 @@ class TodoModel {
         $database = new Database();
         $this->db = $database->conn;
     }
-    public function getAll(int $user_id) {
-        $query = "SELECT * FROM Todos WHERE user_id = ?";
+    public function getAll(int $user_id, int $limit, int $offset) {
+        $query = "SELECT * FROM Todos WHERE user_id = ? LIMIT ? OFFSET ?";
         $pernyataan = $this->db->prepare($query);
         $pernyataan->bind_param(
-            "i",
-            $user_id
+            "iii",
+            $user_id,
+            $limit,
+            $offset
         );
         $pernyataan->execute();
         $hasil = $pernyataan->get_result();
@@ -23,6 +25,15 @@ class TodoModel {
             $data[] = $row;
         }
         return $data;
+    }
+    public function countAll($user_id) {
+        $query = "SELECT COUNT(*) as total FROM Todos WHERE user_id = ?";
+        $pernyataan = $this->db->prepare($query);
+        $pernyataan->bind_param("i", $user_id);
+        $pernyataan->execute();
+        $hasil = $pernyataan->get_result();
+        $baris = $hasil->fetch_assoc();
+        return (int) $baris['total'];
     }
     public function createTodo(int $user_id, string $judul, string $deskripsi = '') {
         $query = "INSERT INTO Todos (user_id, judul, deskripsi) VALUES (
