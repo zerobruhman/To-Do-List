@@ -123,6 +123,7 @@ $pending   = $totalTodos ?? '' - $selesai;
                     <form method="POST" action="index.php?action=todo-toggle" style="display:inline">
                         <input type="hidden" name="csrf_token" value="<?= CSRF::GenerateCsrftoken() ?>">
                         <input type="hidden" name="todo_id" value="<?= $todo['id'] ?>">
+                        <input type="hidden" name="page" value="<?= $page ?? '' ?>">
                         <button type="submit" class="btn-toggle">
                             <?= $done ? 'Buka' : 'Selesai' ?>
                         </button>

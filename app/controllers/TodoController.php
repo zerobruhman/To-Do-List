@@ -44,10 +44,11 @@ class TodoController {
         $todo_id = $_POST['todo_id'] ?? '';
         $user_id = $_SESSION['user_id'];
         $todo = $this->todomodel->findById($todo_id);
+        $page = $_POST['page'] ?? 1;
 
         $statusbaru = ($todo['status'] == 'pending') ? 'selesai' : 'pending';
         $this->todomodel->updateStatus($todo_id, $statusbaru);
-        header("Location: index.php?action=todo");
+        header("Location: index.php?action=todo&page=$page");
         exit;
     }
     public function deleteTodo() {
