@@ -99,7 +99,7 @@ User hanya bisa:
 
 ---
 
-## 🔄 Routing
+## Routing
 
 Contoh routing pada `index.php`:
 
@@ -126,7 +126,7 @@ switch ($action) {
 
 ---
 
-## 🎯 Tujuan Project
+## Tujuan Project
 
 Project ini dibuat untuk belajar:
 
@@ -145,10 +145,6 @@ Project ini dibuat untuk belajar:
 
 ## Pengembangan Selanjutnya
 
-Fitur yang harus di tambahkan:
-
-* Validasi input
-
 Beberapa fitur yang mungkin bisa ditambahkan:
 
 * Pagination
@@ -156,7 +152,7 @@ Beberapa fitur yang mungkin bisa ditambahkan:
 * Filter Status
 * Deadline Todo
 * Reminder
-* Dark Mode
+* Light Mode
 * REST API
 * AJAX / Fetch API
 * Upload Lampiran
