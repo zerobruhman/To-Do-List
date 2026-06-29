@@ -56,10 +56,6 @@ $pending   = $totalTodos ?? '' - $selesai;
             <div class="stat-label">Pending</div>
             <div class="stat-value warn"><?= $pending ?></div>
         </div>
-        <div class="stat-card">
-            <div class="stat-label">Total Pages</div>
-            <div class="stat-value accent"><?= $totalPages ?? '' ?></div>
-        </div>
     </div>
 
     <!-- Add Todo -->
@@ -97,6 +93,7 @@ $pending   = $totalTodos ?? '' - $selesai;
         <div class="list-header">
             <span class="card-title" style="font-size:12px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--text2);">Daftar Todo</span>
             <span class="list-count"><?= $totalTodosperPage ?? '' ?> records</span>
+            <span class="card-title" style="font-size:12px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--text2);">Page <?= $page ?? '' ?></span>
         </div>
 
         <?php if (empty($todos)): ?>
